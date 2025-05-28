@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Love+Light&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+  </head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Paet's Haven</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#home" onclick="showHome(); collapseNavbar()">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAbout" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              About
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
+              <li><a class="dropdown-item" href="#bio" onclick="showBio(); collapseNavbar()">Bio</a></li>
+              <li><a class="dropdown-item" href="#hobbies" onclick="showHobbies(); collapseNavbar()">Hobbies</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownGallery" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Gallery
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
+              <li><a class="dropdown-item" href="#photos" onclick="showPhotos(); collapseNavbar()">Photos</a></li>
+              <li><a class="dropdown-item" href="#videos" onclick="showVideos(); collapseNavbar()">Videos</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home" class="welcome-note text-center">
+    <div class="container">
+      <p class="lead">Welcome to my website!
+        I'm Faith Dizon, a Quality Assurance professional
+        with experience in the BPO industry.
+        With a passion for delivering high-quality solutions,
+        I help businesses achieve their goals through meticulous
+        quality assurance and strategic process optimization.</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+<div id="bio-section" style="display: none;" class="py-5">
+   <div class="container" style="background-image: url('img/fam.jpg'); background-size: cover; background-position: center; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 100%; height: 100vh;">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="img/Faith.JPG" alt="Profile Picture" class="img-fluid mx-auto d-block rounded border border-3 border-light" style="width: 100%; height: auto; max-width: 250px;">
+      </div>
+      <div class="col-md-8">
+        <p style="background-color: rgba(0, 0, 0, 0.5); font-size: 1.1vw;  padding: 10px; border-radius: 10px; color: #fff;">I am Faith Mercullo Dizon. I graduated with a degree in BS Information Technology. With over 13 years of experience in the BPO industry, specifically in quality assurance, I have honed my skills in ensuring exceptional customer experiences. I love watching movies, having quality time with my family and friends, eating, sleeping, playing volleyball, and exploring nature. I am also an avid dog lover, with a pet named Cocong. Currently, I work as a Quality Assurance specialist in a BPO call center company, and I'm grateful to have a loving and handsome partner who has skillfully crafted this website.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hobbies Section -->
+<div id="hobbies-section" style="display: none;" class="py-5">
+  <div class="container">
+    <h2 class="section-title" style="color: rgb(193, 252, 215);">Hobbies</h2>
+    <div class="row">
+     <!-- Volleyball -->
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100 text-center">
+    <img src="https://i0.wp.com/lbtimes.ph/wp-content/uploads/2018/03/DSC_0254.jpg?fit=6000%2C4000&ssl=1" class="hobby-image img-fluid1" alt="Volleyball">
+    <div class="card-body pt-1">
+      <p class="fw-bold small mb-0">Volleyball</p>
+      <p class="card-text small mt-1">I love playing volleyball with friends and teammates. It's a great way to stay active, have fun, and relieve stress. I enjoy the thrill of competition and the sense of camaraderie that comes with being part of a team.</p>
+    </div>
+  </div>
+</div>
+    <!-- Playing with Pets -->
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100 text-center">
+    <img src="img/cocong.jpg" class="hobby-image img-fluid1" alt="Playing with Pets">
+    <div class="card-body pt-1">
+      <p class="fw-bold small mb-0">Playing with Pets</p>
+      <p class="card-text small mt-1">Spending time with furry friends is one of my favorite things to do. They bring so much joy and love into my life. Whether it's playing fetch, cuddling, or just watching them be their adorable selves, every moment with pets is special and brings a smile to my face. I love seeing their little personalities shine through and experiencing the unconditional love they have for me.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Travelling -->
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100 text-center">
+    <img src="https://mediaim.expedia.com/destination/2/deec39053fe547dcdfbfff6d39f2abcc.jpg" class="hobby-image img-fluid1" alt="Travelling">
+    <div class="card-body pt-1">
+      <p class="fw-bold small mb-0">Travelling</p>
+      <p class="card-text small mt-1">Exploring new places and experiencing different cultures is something I love to do in my free time. Whether it's trying new foods, visiting historical landmarks, or immersing myself in local customs, every trip is a new adventure. I enjoy meeting new people, learning about their ways of life, and creating unforgettable memories along the way.</p>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <!-- Eating -->
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100 text-center">
+      <img src="https://ricelifefoodie.com/wp-content/uploads/2025/02/inihaw-na-pusit-grilled-squid-recipe-on-plate.jpg" class="hobby-image img-fluid1" alt="Eating">
+      <div class="card-body pt-1">
+        <p class="fw-bold small mb-0">Eating</p>
+        <p class="card-text small mt-1">Trying new foods and flavors is one of my favorite hobbies. I love discovering new restaurants, cuisines, and cooking techniques. Whether it's sampling street food, fine dining, or experimenting with new recipes, I enjoy the experience of exploring different flavors and textures. Food brings people together, and I love sharing meals with friends and family.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Sleeping -->
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100 text-center">
+      <img src="https://scontent.fceb1-1.fna.fbcdn.net/v/t39.30808-6/497556206_10212472194635270_8735579262391508589_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=cf85f3&_nc_ohc=C-UYSKj39NAQ7kNvwG6mINL&_nc_oc=Adk4a49ygFMcx94-LsuXu6AMfli5VY_lBQZKwHGgppdPYwHD4T6kVdA1aGvkCOoVrc0&_nc_zt=23&_nc_ht=scontent.fceb1-1.fna&_nc_gid=pZC2n8YPupWfTqpGSMCXjA&oh=00_AfLAVKYaZkSs7_OaAnGE_Uw9yCYReAhvsx0d3MmpaRFspA&oe=683B9BFE" class="hobby-image img-fluid1" alt="Sleeping">
+      <div class="card-body pt-1">
+        <p class="fw-bold small mb-0">Sleeping</p>
+        <p class="card-text small mt-1">There's nothing better than a good night's sleep. It recharges my batteries and prepares me for the day ahead. I love curling up with a good book, listening to soothing music, or simply relaxing in a quiet space. A good night's sleep is essential for both body and mind, and I prioritize it to ensure I'm always feeling my best.</p>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- Photos Section -->
+<div id="photos-section" style="display: none;" class="py-5">
+  <div class="container">
+    <h2 class="section-title">Photos</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <img src="first website/folder.png" alt="Photo 1">
+        <img src="https://via.placeholder.com/300" alt="Photo 2">
+      </div>
+      <div class="col-md-4">
+        <img src="https://via.placeholder.com/300" alt="Photo 3">
+        <img src="https://via.placeholder.com/300" alt="Photo 4">
+      </div>
+      <div class="col-md-4">
+        <img src="https://via.placeholder.com/300" alt="Photo 5">
+        <img src="https://via.placeholder.com/300" alt="Photo 6">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Videos Section -->
+<div id="videos-section" style="display: none;" class="py-5">
+  <div class="container">
+    <h2 class="section-title">Videos</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <footer class="footer mt-auto py-3 text-center">
+    <div class="container">
+      <span style="color: #fff;">&copy; 2025 Faith Dizon. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  
+</body>
+</html>
