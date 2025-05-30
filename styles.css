@@ -1,0 +1,284 @@
+
+* {
+  font-family: 'Montserrat', sans-serif ;
+}
+
+
+body {
+background-color: #9681af;
+min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 250;
+
+}
+.footer {
+  margin-top: auto;
+  font-size: 1.5vh;
+}
+
+
+
+/* Paet's Haven */
+.navbar-brand {
+    font-family: 'Love Light', cursive !important;
+    font-size: 50px !important; /* adjust to your desired size */
+    color: rgb(247, 231, 242) !important;      
+}
+/* Paet's Haven */
+
+/* Soc Med */
+.social-media-icons {
+  position: absolute;
+  bottom: 44vh;
+  left: .5vw;
+  gap: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: row; /* Add this */
+}
+.social-media-icons a {
+  color: #e7d0e3;
+  transition: color 0.3s ease;
+  text-decoration: none; /* Remove underline */
+  margin-left: 1.5vw; /* Adjust value */
+}
+
+.social-media-icons a:hover {
+  color: #d15ccb;
+}
+
+.social-media-icons i {
+  font-size: .8vw;
+  font-family: "Font Awesome 6 Brands" !important;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+/* Soc Med */
+
+
+/* Bio Section */
+.bio-container {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100vh;
+  background-image: url('img/fam.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.profile-picture {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+  border: 3px solid #fff;
+  border-radius: 10px;
+}
+
+.bio-text {
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 1.1vw;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+}
+/* Bio Section */
+
+
+/* hobbies Section */
+
+.hobby-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border-radius: 5px;
+  border: 3px solid #ddd;
+}
+
+/* hobbies Section */
+
+
+
+/* Menu */
+.navbar-nav .nav-link {
+  font-size: 20px; /* adjust to your desired size */
+  color: rgb(255, 255, 255) !important;
+  cursor: pointer;
+  
+}
+
+
+.dropdown-item {
+  font-size: 18px; /* adjust to your desired size */
+  text-align: center;
+  padding: 5px 10px; /* adjust the padding as needed */
+}
+.dropdown-menu {
+  padding: 0;
+  min-width: 10px; /* adjust the width as needed */
+  
+}
+/* Menu */
+
+.navbar {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.welcome-note {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 100px 0;
+  color: #fff;
+}
+.section-title {
+  margin-bottom: 30px;
+}
+.gallery img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+
+
+.navbar-brand {
+  font-weight: 500; /* medium bold */
+  font-size: 1.5rem;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.navbar-brand:hover {
+  
+  transform: scale(1.1);
+}
+
+/* Photo Section */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 20px;
+  aspect-ratio: 1 / 1;
+  max-width: 500px; /* adjust the width to your preference */
+  margin: 0 auto;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Music Section*/
+.play-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  position: absolute;
+  top: 3vh;
+  right: 2vw;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.play-button img {
+  width: 3vw;
+  height: auto;
+}
+.play-button:hover {
+  transform: scale(1.2);
+  mix-blend-mode: multiply;
+}
+
+
+
+
+@media only screen and (orientation: portrait) {
+
+
+/* Bio Section */
+.img-fluid {
+  position: absolute;
+  width: 30vw !important;
+  height: auto;
+  left: 4vw;
+  margin-top: -1vh;
+
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
+.border-light {
+  border: 3px solid #fff;
+}
+
+#bio-section p {
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 3vw !important;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 55vh !important;
+  color: #fff;
+}
+/* Bio Section */
+
+/* Soc Med Section */
+.social-media-icons {
+  position: relative;
+  bottom: -10vh;
+  left: -6vw;
+  gap: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: row; /* Add this */
+}
+.social-media-icons a {
+  color: #e7d0e3;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Remove underline */
+  margin-left: 5vw !important; /* Adjust value */
+}
+.social-media-icons i {
+  font-size: 3vw;
+  font-family: "Font Awesome 6 Brands" !important;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+/* Soc Med Section */
+
+/* Music Section */
+.play-button {
+  position: relative;
+  top: -54.5vh;
+  right: -39vw;
+}
+.play-button img {
+  width: 50px;
+  height: 50px;
+}
+.play-text{
+  font-size: 7px !important;
+  margin-top: -.7vh !important;
+}
+/* Music Section */
+
+
+}
+
+
+
