@@ -264,7 +264,7 @@ min-height: 100vh;
 /* Music Section */
 .play-button {
   position: relative;
-  top: -220px;
+  top: -420px;
   right: -39vw;
 }
 .play-button img {
