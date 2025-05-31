@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-weight: 500;
+  font-weight: 450;
 }
 
 /* Navbar Styles */
