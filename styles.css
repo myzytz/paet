@@ -282,7 +282,7 @@ body {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 128px);
-  gap: 2rem;
+  gap: 0rem;
   justify-content: center;
 }
 
