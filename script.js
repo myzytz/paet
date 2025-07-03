@@ -48,3 +48,9 @@ function showHome() {
   document.querySelector("footer").style.display = "block";
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// back functions in Gallery Sections 
+if (localStorage.getItem('showpfolder') === 'true') {
+  showPhotos();
+  localStorage.removeItem('showpfolder');
+}
