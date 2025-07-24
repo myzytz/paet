@@ -27,7 +27,7 @@ body {
 .navbar-brand {
   font-family: 'Love Light', cursive;
   font-size: 2rem;
-  color: #F0E4CC !important;
+  color: #F5F5DC !important;
 }
 
 .navbar-nav .nav-link {
@@ -416,7 +416,7 @@ body {
 
 @media (max-width: 375px) {
   .navbar-brand {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
 /* bio styles*/
