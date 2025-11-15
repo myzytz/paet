@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grechen+Fuemen&family=Qwitcher+Grypen:wght@400;700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    </head>
+
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Paet's Haven</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#home" onclick="showHome(); collapseNavbar()">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAbout" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              About
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
+              <li><a class="dropdown-item" href="#bio" onclick="showBio(); collapseNavbar()">Bio</a></li>
+              <li><a class="dropdown-item" href="#portfolio" onclick="showPort(); collapseNavbar()">Portfolio</a></li>
+              <li><a class="dropdown-item" href="#hobbies" onclick="showHobbies(); collapseNavbar()">Hobbies</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownGallery" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Gallery
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
+              <li><a class="dropdown-item" href="#photos" onclick="showPhotos(); collapseNavbar()">Photos</a></li>
+              <li><a class="dropdown-item" href="#videos" onclick="showVideos(); collapseNavbar()">Videos</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+
+  
+  
+  
+
+
+
+  <!-- Home Section -->
+<section id="home" style="text-align: center;">
+  <div class="container" style=" max-width: 100vw; margin: 0 auto; background-color: rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px;">
+    <img src="https://static.vecteezy.com/system/resources/thumbnails/051/080/718/small_2x/a-woman-s-face-with-pink-leaves-on-it-png.png" 
+         alt="Welcome Image" 
+         style="max-width: 100%; width: 23vw; height: auto;">
+
+      <div class="social-media-icons">
+      <a href="https://www.facebook.com/faithdizon13" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#" onclick="showDialog('Instagram')">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="#" onclick="showDialog('TikTok')">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://myzytz.github.io/zytz/" onclick="showDialog('profile')" title="Website sa gwapo">
+       <i class="fas fa-user-tie"></i>
+      </a>
+      <a href="#" onclick="showDialog('LinkedIn')">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    <a href="#" id="contact-icon" style="cursor: pointer;">
+       <i class="fas fa-phone-alt"></i>
+    </a>
+
+<div id="dialog" style="display:none; color: whitesmoke; border: 1px solid rgb(255, 255, 255); padding: 10px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgb(190, 123, 190); border-radius: 3px; text-align: center;">
+  <p>Phone: 09265055377</p>
+  <p>Email: faithmercullodizon13@gmail.com</p>
+  <button id="close-dialog" style="padding: 4px 8px; border: none; border-radius: 3px; background-color:  rgba(0, 0, 0, 0.3); color: white; cursor: pointer;">Close</button>
+</div>
+
+<script>
+  document.getElementById('contact-icon').addEventListener('click', function() {
+    document.getElementById("dialog").style.display = "block";
+  });
+
+  document.getElementById('close-dialog').addEventListener('click', function() {
+    document.getElementById("dialog").style.display = "none";
+  });
+</script>
+    </div>
+
+     <audio id="myAudio" playsinline>
+    <source src="sounds/baby.weba" type="audio/webm">
+  </audio>
+  
+ <button class="play-button" onclick="document.getElementById('myAudio').play()">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img src="icons/play2.JPG" style=" width: 3vw; height: auto;" alt="Play">
+  </div>
+</button>
+
+  </div>
+</section>
+
+<!-- About Section -->
+<div id="bio-section">
+  <div class="bio-container">
+    <div class="row">
+      <div class="col-md-8 bio-text">
+        <p>I am Faith Mercullo Dizon. I graduated with a degree in BS Information Technology. With over 13 years of experience in the BPO industry, specifically in quality assurance, I have honed my skills in ensuring exceptional customer experiences. I love watching movies, having quality time with my family and friends, eating, sleeping, playing volleyball, and exploring nature. I am also an avid dog lover, with a pet named Cocong. Currently, I work as a Quality Assurance specialist in a BPO call center company, and I'm grateful to have a loving and handsome partner who has skillfully crafted this website.</p>
+      </div>
+      <div class="col-md-4 bio-image">
+        <img src="img/Faith.JPG" alt="Profile Picture">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hobbies Section -->
+<div id="hobbies-section" style="display: none;" class="py-5">
+  <div class="container">
+    <h2 class="section-title" style="color: rgb(193, 252, 215);">Hobbies</h2>
+    <div class="row">
+     <!-- Volleyball -->
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100 text-center">
+    <img src="img/volley.JPG" class="hobby-image img-fluid1" alt="Volleyball">
+    <div class="card-body pt-1">
+      <p class="fw-bold small mb-0">Volleyball</p>
+      <p class="card-text small mt-1">I love playing volleyball with friends and teammates. It's a great way to stay active, have fun, and relieve stress. I enjoy the thrill of competition and the sense of camaraderie that comes with being part of a team.</p>
+    </div>
+  </div>
+</div>
+    <!-- Playing with Pets -->
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100 text-center">
+    <img src="img/cocong.jpg" class="hobby-image img-fluid1" alt="Playing with Pets">
+    <div class="card-body pt-1">
+      <p class="fw-bold small mb-0">Playing with Pets</p>
+      <p class="card-text small mt-1">Spending time with furry friends is one of my favorite things to do. They bring so much joy and love into my life. Whether it's playing fetch, cuddling, or just watching them be their adorable selves, every moment with pets is special and brings a smile to my face. I love seeing their little personalities shine through and experiencing the unconditional love they have for me.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Travelling -->
+<div class="col-lg-4 col-md-6 mb-4">
+  <div class="card h-100 text-center">
+    <img src="https://mediaim.expedia.com/destination/2/deec39053fe547dcdfbfff6d39f2abcc.jpg" class="hobby-image img-fluid1" alt="Travelling">
+    <div class="card-body pt-1">
+      <p class="fw-bold small mb-0">Travelling</p>
+      <p class="card-text small mt-1">Exploring new places and experiencing different cultures is something I love to do in my free time. Whether it's trying new foods, visiting historical landmarks, or immersing myself in local customs, every trip is a new adventure. I enjoy meeting new people, learning about their ways of life, and creating unforgettable memories along the way.</p>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Eating -->
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100 text-center">
+      <img src="https://ricelifefoodie.com/wp-content/uploads/2025/02/inihaw-na-pusit-grilled-squid-recipe-on-plate.jpg" class="hobby-image img-fluid1" alt="Eating">
+      <div class="card-body pt-1">
+        <p class="fw-bold small mb-0">Eating</p>
+        <p class="card-text small mt-1">Trying new foods and flavors is one of my favorite hobbies. I love discovering new restaurants, cuisines, and cooking techniques. Whether it's sampling street food, fine dining, or experimenting with new recipes, I enjoy the experience of exploring different flavors and textures. Food brings people together, and I love sharing meals with friends and family.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Sleeping -->
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100 text-center">
+      <img src="img/sleep.jpg" class="hobby-image img-fluid1" alt="Sleeping">
+      <div class="card-body pt-1">
+        <p class="fw-bold small mb-0">Sleeping</p>
+        <p class="card-text small mt-1">There's nothing better than a good night's sleep. It recharges my batteries and prepares me for the day ahead. I love curling up with a good book, listening to soothing music, or simply relaxing in a quiet space. A good night's sleep is essential for both body and mind, and I prioritize it to ensure I'm always feeling my best.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Bond with fam -->
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100 text-center">
+      <img src="img/fam1.jpg" class="hobby-image img-fluid1" alt="Sleeping">
+      <div class="card-body pt-1">
+        <p class="fw-bold small mb-0">Bond with my family</p>
+        <p class="card-text small mt-1">I love spending quality time with my family, whether it's a casual dinner at home, a fun-filled day at the park, or a relaxing movie night. Being surrounded by the people I care about most brings me joy and a sense of belonging. These moments create lasting memories and strengthen our bond, reminding me of the importance of family in my life.</p>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Portfolio Section -->
+<div id="portfolio-section" style="display: none;">
+  <div id="portfolio">
+
+    <div style="background: linear-gradient(to right, #034694, #4682B4); padding: 20px;">
+  <section id="education">
+    <h2 style="text-align: center; margin-bottom: 10px; font-weight: bold; color:#ffffff; font-size: 20px; ">Educational Background</h2>
+    <div class="education-item" style="position: relative;">
+      <div style="position: absolute; right: 0; top: 0; text-align: center;">
+    <a href="edu.html">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Information_pink.svg" alt="More Info" style="width: 30px; height: 30px; border-radius: 50%;">
+    </a>
+  </div>
+      <img src="https://upload.wikimedia.org/wikipedia/en/6/67/Negros_Oriental_State_University.png" alt="NORSU Logo" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">
+      <h3 style="font-weight: bold;">Bachelor of Science in Information Technology, Negros Oriental State University (NORSU)</h3>
+      <p class="dates" style="color:steelblue;" >Graduated 2009</p>
+      <p>Relevant coursework included programming, database systems, networking, and software development.</p>
+      <ul>
+  <li>Basic knowledge of programming concepts</li>
+  <li>Familiarity with database systems</li>
+  <li>Understanding of basic computer networking</li>
+  <li>Exposure to software development principles</li>
+</ul>
+    </div>
+  </section>
+</div>
+
+<!-- As a Customer Service Representatives -->
+    <div style="background: linear-gradient(to right, #d6c313, #8d0977); padding: 20px; position: relative;">
+  <section id="experience">
+    <h2 style="text-align: center; margin-bottom: 10px; font-weight: bold; color:#ffffff; font-size: 20px;">Job Experience</h2>
+    <div class="experience-item" style="position: relative;">
+  <div style="position: absolute; right: 0; top: 0; text-align: center;">
+    <a href="bpo.html">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Information_pink.svg" alt="More Info" style="width: 30px; height: 30px; border-radius: 50%;">
+    </a>
+    
+  </div>
+  <img src="https://www.epldt.com/wp-content/uploads/2025/02/Mask-Group-88.png" alt="Company Logo" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">
+  <h3 style="font-weight: bold;">Customer Service Representative, e-PLDT Ventus / Spi CRM, Inc.</h3>
+  <p class="dates" style="color:steelblue;" >2009 - 2018</p>
+  <p>Provided excellent customer service and support by actively listening to customers, resolving their issues, and ensuring their concerns were addressed in a timely and professional manner.</p>
+  <ul>
+    <li>Handle inquiries, aftersales requests and technical issues via phone calls.</li>
+    <li>I had also experienced being one of the Learning Senpais for few months.</li>
+  </ul>
+</div>
+  </section> 
+</div>
+
+<!-- As a Quality Assurace Specialist -->
+<div style="background: linear-gradient(to right, #d6c313, #8d0977); padding: 20px; position: relative;">
+  <section id="experience">
+    <div class="experience-item" style="position: relative;">
+  <div style="position: absolute; right: 0; top: 0; text-align: center;">
+    <a href="bpo.html">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Information_pink.svg" alt="More Info" style="width: 30px; height: 30px; border-radius: 50%;">
+    </a>
+    
+  </div>
+  <img src="https://i.ytimg.com/vi/3w1oiXoslhs/hqdefault.jpg" alt="Company Logo" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">
+  <h3 style="font-weight: bold;">Quality Assurance Specialist, INFOCOM TECHNOLOGIES, INC.</h3>
+  <p class="dates" style="color:steelblue;" >2018 - Present</p>
+  <p>Ensured high-quality customer service and support by monitoring and evaluating agent performance.</p>
+  <ul>
+    <li>Quality Monitoring & Auditing.</li>
+    <li>Data Analysis & Reporting.</li>
+     <li>Training & Coaching</li>    
+     <li>Product & System Knowledge</li> 
+  </ul>
+</div>
+  </section> 
+</div>
+  </div>
+</div>
+
+<style>
+
+#portfolio * {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+.experience-item > div:first-child > span {
+  color: gray !important;
+}
+
+.experience-item, .education-item {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.experience-item img, .education-item img {
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+.dates {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#portfolio ul li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+#portfolio ul li:before {
+    content: "\2022";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 18px;
+    color: #b53ec0;
+}
+
+</style>
+
+
+<!-- Photos Section -->
+<div id="photos-section" style="padding: 40px 0; display: none;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <h2 style="text-align: center; color: rgb(230, 219, 233);">Photos</h2>
+    <div class="grid-container">
+      <div class="grid-item">
+        <a href="Me & I.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/User-Blue-Folder-icon.png" alt="Photo 1">
+        </a>
+        <p>Me</p>
+      </div>
+      <div class="grid-item">
+        <a href="Family.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/Desktop-Metal-Folder-icon.png" alt="Photo 2">
+        </a>
+        <p>Family</p>
+      </div>
+      <div class="grid-item">
+        <a href="Friends.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/Movies-Black-Folder-icon.png" alt="Photo 3">
+        </a>
+        <p>Friends</p>
+      </div>
+      <div class="grid-item">
+        <a href="minime.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/Developer-Purple-Folder-icon.png" alt="Photo 4">
+        </a>
+        <p>minime</p>
+      </div>  
+    </div>
+  </div>
+</div>
+
+<!-- Videos Section -->
+<div id="videos-section" style="padding: 40px 0; display: none;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <h2 style="text-align: center; color: rgb(230, 219, 233);">Videos</h2>
+    <div class="grid-container">
+      <div class="grid-item">
+        <a href="myVidz.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/User-Black-Folder-icon.png" alt="Photo 1">
+        </a>
+        <p>MyVidz</p>
+      </div>
+      <div class="grid-item">
+        <a href="Doc.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/Movies-Black-Folder-icon.png" alt="Photo 2">
+        </a>
+        <p>Documentary</p>
+      </div>
+      <div class="grid-item">
+        <a href="BBG.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/256/Bookmark-Blue-Folder-icon.png" alt="Photo 3">
+        </a>
+        <p>BBG</p>
+      </div>
+      <div class="grid-item">
+        <a href="Pinoy.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/256/DropBox-Blue-Folder-icon.png" alt="Photo 4">
+        </a>
+        <p>FunnyVdz</p>
+      </div>
+      <div class="grid-item">
+        <a href="movies.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/Photos-Blue-Folder-icon.png" alt="Photo 7">
+        </a>
+        <p>Movies</p>
+      </div>
+      <div class="grid-item">
+        <a href="kengkoy.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/Games-Blue-Folder-icon.png" alt="Photo 6">
+        </a>
+        <p>kengkoy</p>
+      </div>
+      <div class="grid-item">
+        <a href="slamdunk.html">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/Desktop-Black-Folder-icon.png" alt="Photo 5">
+        </a>
+        <p>Slamdunk</p>
+      </div>
+      <div class="grid-item">
+        <a href="#">
+          <img class="zoom-image" src="https://icons.iconarchive.com/icons/wilnichols/alumin-folders/128/Developer-Metal-2-Folder-icon.png" alt="Photo 8">
+        </a>
+        <p>empty</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <footer class="footer mt-auto py-3 text-center">
+    <div class="container">
+      <span><a href="sorry.html" style="text-decoration: none; color: inherit;">&copy; 2025 Faith Dizon. All rights reserved.</a></span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+  
+<script>
+// Rotate Lock
+let currentContent = document.body.innerHTML;
+
+if (/Android.*Mobile|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && window.screen.width <= 375) {
+  const message = document.createElement('div');
+  message.style.position = 'fixed';
+  message.style.top = '0';
+  message.style.left = '0';
+  message.style.width = '100%';
+  message.style.height = '100vh';
+  message.style.fontSize = '15px';
+  message.style.fontWeight = 'bold';
+  message.style.background = '#333';
+  message.style.color = '#fff';
+  message.style.display = 'none';
+  message.style.justifyContent = 'center';
+  message.style.alignItems = 'center';
+  message.style.zIndex = '9999';
+  message.textContent = 'Rotate it back para walay samok';
+  document.body.appendChild(message);
+
+  window.addEventListener('orientationchange', () => {
+    if (window.orientation === 90 || window.orientation === -90) {
+      message.style.display = 'flex';
+    } else {
+      message.style.display = 'none';
+    }
+  });
+
+  // Check initial orientation
+  if (window.orientation === 90 || window.orientation === -90) {
+    message.style.display = 'flex';
+  }
+}
+</script>
+
+</body>
+</html>
