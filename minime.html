@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif !important;
+      background-color: #9681af;
+    }
+
+  .stacked-images {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+    .stacked-images img {
+      position: absolute;
+      width: 100px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* generated CSS */
+    .stacked-images img:nth-child(1) {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      z-index: 29;
+    }
+
+    /* use the sass generated css or the js approach */
+    /* for simplicity, i'll just add the styles for 29 images */
+    .stacked-images img:nth-child(n+2) {
+      top: calc(50% + (var(--i) * 10px));
+      left: calc(50% + (var(--i) * 5px));
+      transform: rotate(calc(var(--i) * 10deg));
+      z-index: calc(29 - var(--i));
+    }
+
+    .stacked-images img:nth-child(2) {
+      --i: 1;
+    }
+
+    .stacked-images img:nth-child(3) {
+      --i: 2;
+    }
+
+    /* add more styles for the rest of the images */
+    .stacked-images img:nth-child(4) {
+      --i: 3;
+    }
+
+    .stacked-images img:nth-child(5) {
+      --i: 4;
+    }
+
+    .stacked-images img:nth-child(6) {
+      --i: 5;
+    }
+
+    .stacked-images img:nth-child(7) {
+      --i: 6;
+    }
+
+    .stacked-images img:nth-child(8) {
+      --i: 7;
+    }
+
+    .stacked-images img:nth-child(9) {
+      --i: 8;
+    }
+
+    .stacked-images img:nth-child(10) {
+      --i: 9;
+    }
+
+    .stacked-images img:nth-child(11) {
+      --i: 10;
+    }
+
+    .stacked-images img:nth-child(12) {
+      --i: 11;
+    }
+
+    .stacked-images img:nth-child(13) {
+      --i: 12;
+    }
+
+    .stacked-images img:nth-child(14) {
+      --i: 13;
+    }
+
+    .stacked-images img:nth-child(15) {
+      --i: 14;
+    }
+
+    .stacked-images img:nth-child(16) {
+      --i: 15;
+    }
+
+    .stacked-images img:nth-child(17) {
+      --i: 16;
+    }
+
+    .stacked-images img:nth-child(18) {
+      --i: 17;
+    }
+
+    .stacked-images img:nth-child(19) {
+      --i: 18;
+    }
+
+    .stacked-images img:nth-child(20) {
+      --i: 19;
+    }
+
+    .stacked-images img:nth-child(21) {
+      --i: 20;
+    }
+
+    .stacked-images img:nth-child(22) {
+      --i: 21;
+    }
+
+    .stacked-images img:nth-child(23) {
+      --i: 22;
+    }
+
+    .stacked-images img:nth-child(24) {
+      --i: 23;
+    }
+
+    .stacked-images img:nth-child(25) {
+      --i: 24;
+    }
+
+    .stacked-images img:nth-child(26) {
+      --i: 25;
+    }
+
+    .stacked-images img:nth-child(27) {
+      --i: 26;
+    }
+
+    .stacked-images img:nth-child(28) {
+      --i: 27;
+    }
+
+    .stacked-images img:nth-child(29) {
+      --i: 28;
+    }
+
+    .modal {
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 423px; /* 4 rows x 100px + 3 gaps x 10px */
+  overflow-y: auto;
+}
+
+.modal-content img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  margin-bottom: 1px;
+}
+
+    .image-modal {
+      position: fixed;
+      z-index: 2;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .image-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  cursor: pointer;
+  z-index: 3;
+}
+
+
+    @media (max-width: 768px) {
+   .modal-content {
+    grid-template-columns: repeat(4, 80px);
+    gap: 5px;
+    max-height: 340px; /* 4 rows x 80px + 3 gaps x 5px */
+  }
+  
+  .modal-content img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .stacked-images {
+    top: 40% !important;
+    left: 36.5% !important;
+    width: 250px;
+    height: 250px;
+  }
+  
+  .stacked-images img {
+    width: 80px;
+    height: auto;
+  }
+  
+  .modal-content::-webkit-scrollbar { 
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+@media (max-width: 375px) {
+  .modal-content {
+    grid-template-columns: repeat(4, 80px);
+    gap: 5px;
+    max-height: 340px; /* 4 rows x 80px + 3 gaps x 5px */
+  }
+  
+  .modal-content img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .stacked-images {
+    top: 40% !important;
+    left: 32.5% !important;
+    width: 250px;
+    height: 250px;
+  }
+  
+  .stacked-images img {
+    width: 80px;
+    height: auto;
+  }
+
+  .modal-content::-webkit-scrollbar { 
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+}
+
+
+
+    .back-button-container {
+          position: fixed;
+          top: 12px;
+          left: 4px;
+       }
+.back-button {
+  background-color: #7d619e;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  background-color: #b4a4c9;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="stacked-images" onclick="showModal()">
+    <!-- add 29 images here -->
+    <img src="mini/1.jfif" alt="Image 1">
+    <img src="mini/2.jfif" alt="Image 2">
+    <img src="mini/3.jfif" alt="Image 3">
+    <img src="mini/4.jfif" alt="Image 4">
+    <img src="mini/5.jfif" alt="Image 5">
+    <img src="mini/6.jfif" alt="Image 6">
+    <img src="mini/7.jfif" alt="Image 7">
+    <img src="mini/8.jfif" alt="Image 8">
+    <img src="mini/9.jfif" alt="Image 9">
+    <img src="mini/10.jfif" alt="Image 10">
+    
+    
+  </div>
+
+  <div id="modal" class="modal" style="display: none;">
+    <div class="modal-content">
+     
+      <img src="mini/1.jfif" alt="Image 1" onclick="showImageModal(this.src)">
+      <img src="mini/2.jfif" alt="Image 2" onclick="showImageModal(this.src)">
+      <img src="mini/3.jfif" alt="Image 3" onclick="showImageModal(this.src)">
+      <img src="mini/4.jfif" alt="Image 4" onclick="showImageModal(this.src)">
+      <img src="mini/5.jfif" alt="Image 5" onclick="showImageModal(this.src)">
+      <img src="mini/6.jfif" alt="Image 6" onclick="showImageModal(this.src)">
+      <img src="mini/7.jfif" alt="Image 7" onclick="showImageModal(this.src)">
+      <img src="mini/8.jfif" alt="Image 8" onclick="showImageModal(this.src)">
+      <img src="mini/9.jfif" alt="Image 9" onclick="showImageModal(this.src)">
+      <img src="mini/10.jfif" alt="Image 10" onclick="showImageModal(this.src)">
+      <img src="mini/11.jfif" alt="Image 11" onclick="showImageModal(this.src)">
+      <img src="mini/12.jfif" alt="Image 12" onclick="showImageModal(this.src)">
+      <img src="mini/13.jfif" alt="Image 13" onclick="showImageModal(this.src)">
+      <img src="mini/14.jfif" alt="Image 14" onclick="showImageModal(this.src)">
+      <img src="mini/15.jfif" alt="Image 15" onclick="showImageModal(this.src)">
+      <img src="mini/16.jfif" alt="Image 16" onclick="showImageModal(this.src)">
+      <img src="mini/17.jfif" alt="Image 17" onclick="showImageModal(this.src)">
+      <img src="mini/18.jfif" alt="Image 18" onclick="showImageModal(this.src)">
+      <img src="mini/19.jfif" alt="Image 19" onclick="showImageModal(this.src)">
+      <img src="mini/20.jfif" alt="Image 20" onclick="showImageModal(this.src)">
+      <img src="mini/21.jfif" alt="Image 21" onclick="showImageModal(this.src)">
+      <img src="mini/22.jfif" alt="Image 22" onclick="showImageModal(this.src)">
+      <img src="mini/23.jfif" alt="Image 23" onclick="showImageModal(this.src)">
+      <img src="mini/24.jfif" alt="Image 24" onclick="showImageModal(this.src)">
+      <img src="mini/25.jfif" alt="Image 25" onclick="showImageModal(this.src)">
+      <img src="mini/26.jfif" alt="Image 26" onclick="showImageModal(this.src)">
+      <img src="mini/27.jfif" alt="Image 27" onclick="showImageModal(this.src)">
+      <img src="mini/28.jfif" alt="Image 28" onclick="showImageModal(this.src)">
+      <img src="mini/29.jfif" alt="Image 29" onclick="showImageModal(this.src)">
+      <img src="mini/30.jfif" alt="Image 29" onclick="showImageModal(this.src)">
+      <img src="mini/31.jfif" alt="Image 29" onclick="showImageModal(this.src)">
+      <img src="mini/32.jfif" alt="Image 29" onclick="showImageModal(this.src)">
+    </div>
+    <span class="close-btn" onclick="closeModal()">Close</span>
+  </div>
+
+  <div id="image-modal" class="image-modal" style="display: none;">
+  <img id="large-image" src="" alt="Large Image">
+  <span class="image-close-btn" onclick="closeImageModal()">Close</span>
+</div>
+
+  <div class="back-button-container">
+    <a href="index.html" onclick="localStorage.setItem('showpfolder', true); return true;" class="back-button"> Back</a>
+  </div>
+
+
+  <div style="position: fixed; top: 10px; right: 10px;">
+  <a href="minime.html">
+    <i class="fas fa-sync-alt" style="font-size: 24px; color: white;"></i>
+  </a>
+</div>
+
+
+  <script>
+    function showModal() {
+  document.querySelector('.stacked-images').style.display = 'none';
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.querySelector('.stacked-images').style.display = 'block';
+  document.getElementById("modal").style.display = "none";
+}
+let currentImageIndex;
+let images;
+
+function showImageModal(src) {
+  images = document.querySelectorAll('.modal-content img');
+  for (let i = 0; i < images.length; i++) {
+    if (images[i].src === src) {
+      currentImageIndex = i;
+      break;
+    }
+  }
+  document.getElementById("large-image").src = src;
+  document.getElementById("image-modal").style.display = "flex";
+  document.getElementById("image-modal").addEventListener("touchstart", handleTouchStart);
+  document.getElementById("image-modal").addEventListener("touchend", handleTouchEnd);
+  document.getElementById("large-image").addEventListener("click", handleClick);
+}
+
+function closeImageModal() {
+  document.getElementById("image-modal").style.display = "none";
+  document.getElementById("image-modal").removeEventListener("touchstart", handleTouchStart);
+  document.getElementById("image-modal").removeEventListener("touchend", handleTouchEnd);
+  document.getElementById("large-image").removeEventListener("click", handleClick);
+}
+document.getElementById("image-modal").addEventListener("click", function(event) { if (event.target === this) { closeImageModal(); } });
+
+let startX;
+
+function handleTouchStart(e) {
+  startX = e.touches[0].clientX;
+}
+
+function handleTouchEnd(e) {
+  let endX = e.changedTouches[0].clientX;
+  if (startX > endX + 50) {
+    showNextImage();
+  } else if (startX < endX - 50) {
+    showPreviousImage();
+  }
+}
+
+function handleClick(e) {
+  let rect = document.getElementById("large-image").getBoundingClientRect();
+  let x = e.clientX - rect.left;
+  if (x < rect.width / 2) {
+    showPreviousImage();
+  } else {
+    showNextImage();
+  }
+}
+
+function showPreviousImage() {
+  currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+  document.getElementById("large-image").src = images[currentImageIndex].src;
+}
+
+function showNextImage() {
+  currentImageIndex = (currentImageIndex + 1) % images.length;
+  document.getElementById("large-image").src = images[currentImageIndex].src;
+}
+const stackedImages = document.querySelectorAll('.stacked-images img');
+
+stackedImages.forEach((image, index) => {
+  if (index === 0) {
+    image.style.top = `50%`;
+    image.style.left = `50%`;
+    image.style.transform = `translate(-50%, -50%) ${image.style.transform}`;
+    image.style.zIndex = stackedImages.length - index;
+  } else {
+    const x = Math.random() * 200 - 100; 
+    const y = Math.random() * 200 - 100; 
+
+    image.style.top = `calc(50% + ${y}px)`;
+    image.style.left = `calc(50% + ${x}px)`;
+    image.style.zIndex = stackedImages.length - index;
+  }
+});
+
+
+
+
+  </script>
+</body>
+</html>
