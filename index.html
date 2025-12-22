@@ -105,15 +105,14 @@
 </script>
     </div>
 
-     <audio id="myAudio" playsinline>
-    <source src="sounds/baby.weba" type="audio/webm">
-  </audio>
-  
- <button class="play-button" onclick="document.getElementById('myAudio').play()">
+  <button class="play-button" onclick="document.getElementById('myAudio').play(); setTimeout(function(){ location.href='music.html'; }, 1000)">
   <div style="display: flex; flex-direction: column; align-items: center;">
     <img src="icons/play2.JPG" style=" width: 3vw; height: auto;" alt="Play">
   </div>
 </button>
+<audio id="myAudio" playsinline>
+  <source src="sounds/baby.weba" type="audio/webm">
+</audio>
 
   </div>
 </section>
@@ -482,5 +481,6 @@ if (/Android.*Mobile|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator
 </body>
 
 </html>
+
 
 
