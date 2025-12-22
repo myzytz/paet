@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Collection</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mynerve&display=swap">
+  
+<style>
+  * {
+    font-family: 'Mynerve', cursive;
+  }
+  
+  body {
+    text-align: center;
+    background-image: url('https://i.pinimg.com/originals/31/68/c0/3168c09eeeb529be5b321575fe56b02b.gif');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: #fff;
+  }
+  
+  #category-select {
+  margin-bottom: 30px;
+  position: relative;
+  top: 20px;
+  padding: 3px 30px 5px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 2px;
+  background-color: #d865b5;
+  color: #fff;
+  cursor: pointer;
+  height: 35px;
+  text-align-last: center;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 5px center; /* adjust the arrow position */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+
+}
+  
+  #category-select:hover {
+     background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  #category-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #5c5e5f;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  
+  #song-list {
+  background-color: transparent;
+  padding: 0;
+  width: fit-content;
+  margin: auto;
+}
+  
+  #song-list li {
+    margin-bottom: 10px;
+  }
+  
+  .song-title {
+    cursor: pointer;
+  }
+  
+  .song-title:hover {
+    color: #f1afe1;
+  }
+  
+  audio {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  
+
+   @media only screen and (max-width: 375px) {
+   body {
+  background-image: url('https://i.pinimg.com/originals/5d/1c/a5/5d1ca57c605fdae93d9896719112e572.gif') !important;
+  background-size: 100% 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  overflow: hidden !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+ #category-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 160px !important;
+    margin-bottom: 30px !important;
+    position: relative !important;
+    top: 20px !important;
+    padding: 3px 30px 5px 10px !important;
+    font-size: 16px !important;
+    border: none !important;
+    border-radius: 2px !important;
+    background-color: #d865b5 !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    height: 35px !important;
+    text-align-last: center !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>') !important;
+    background-repeat: no-repeat !important;
+    background-position: right 5px center !important;
+  }
+
+  
+  #song-list {
+    font-size: 14px !important; 
+    background-color: transparent !important;
+  padding: 0 !important;
+  width: fit-content !important;
+  margin: auto !important;
+  }
+}
+    
+    @media only screen and (min-width: 376px) and (max-width: 768px) {
+      body {
+        background-image: url('https://img.freepik.com/free-photo/cowboy-inspiration-with-hat-top-view_23-2149484756.jpg?semt=ais_hybrid&w=740&q=80');
+        background-size: cover;
+      }
+      #category-select {
+        width: 50%;
+      }
+      #song-list {
+        font-size: 16px;
+      }
+    }
+
+     
+
+  </style>
+</head>
+<body>
+  
+<select id="category-select" onchange="filterSongs(this.value)">
+  <option value="">Select Categories</option>
+  <option value="love-songs">Sleep Songzzz</option>
+  <option value="rock-songs">Medley Rocks</option>
+</select>
+
+<ul id="song-list">
+  <!-- Love Songs -->
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player1')">How deep is your love</span>
+    <audio id="player1" controls>
+      <source src="music/how deep.mp4" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player2')">Dont Know What To Say</span>
+    <audio id="player2" controls>
+      <source src="music/Dont Know What To Say.mp4" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player3'); document.getElementById('player3').currentTime = 1;">Aubrey</span>
+    <audio id="player3" controls>
+      <source src="music/aubrey.mp4" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player4'); document.getElementById('player4').currentTime = 5;">In my dreams</span>
+    <audio id="player4" controls>
+      <source src="music/In My Dreams.mp4" type="audio/webm">
+    </audio>
+  </li>
+
+  
+  <!-- Rock Songs -->
+  <li data-category="rock-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player5')">Rock Song 1</span>
+    <audio id="player5" controls>
+      <source src="music/rock-song-1.mp4" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="rock-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player6')">Rock Song 2</span>
+    <audio id="player6" controls>
+      <source src="music/rock-song-2.mp4" type="audio/webm">
+    </audio>
+  </li>
+</ul>
+  
+  <script>
+    let currentPlayer = null;
+let players = ['player1', 'player2', 'player3', 'player4'];
+
+function playSong(playerId) {
+  if (currentPlayer) {
+    currentPlayer.pause();
+    currentPlayer.currentTime = 0;
+    currentPlayer.style.display = 'none';
+  }
+  currentPlayer = document.getElementById(playerId);
+  currentPlayer.style.display = 'block';
+  currentPlayer.play();
+}
+
+function playNext(nextPlayer) {
+  if (currentPlayer) {
+    currentPlayer.pause();
+    currentPlayer.currentTime = 0;
+    currentPlayer.style.display = 'none';
+  }
+  setTimeout(function() {
+    currentPlayer = document.getElementById(nextPlayer);
+    currentPlayer.style.display = 'block';
+    currentPlayer.play();
+  }, 500);
+}
+
+function filterSongs(category) {
+  if (currentPlayer) {
+    currentPlayer.pause();
+    currentPlayer.currentTime = 0;
+    currentPlayer.style.display = 'none';
+  }
+  
+  const songList = document.getElementById('song-list');
+  const songs = songList.getElementsByTagName('li');
+  
+  for (let i = 0; i < songs.length; i++) {
+    const song = songs[i];
+    song.style.display = 'none';
+  }
+  
+  if (category && category !== '' && category !== 'Select Categories') {
+    const filteredSongs = songList.querySelectorAll(`li[data-category="${category}"]`);
+    filteredSongs.forEach(song => {
+      song.style.display = 'block';
+    });
+    songList.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    songList.style.padding = '10px';
+    songList.style.width = 'fit-content';
+    songList.style.margin = 'auto';
+    songList.style.borderRadius = '5px';
+  } else {
+    songList.style.background = 'none';
+    songList.style.padding = '0';
+    songList.style.width = '';
+    songList.style.margin = '';
+    songList.style.borderRadius = '';
+  }
+}
+
+document.addEventListener('click', function(event) {
+  const songList = document.getElementById('song-list');
+  const categorySelect = document.getElementById('category-select');
+  if (!songList.contains(event.target) && event.target !== categorySelect) {
+    filterSongs('Select Categories');
+    categorySelect.value = ''; // reset the select value
+  }
+});
+
+  </script>
+</body>
+</html>
