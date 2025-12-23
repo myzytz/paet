@@ -315,10 +315,10 @@ function playSong(playerId, songElement) {
   }
   currentPlayer = document.getElementById(playerId);
   currentPlayer.classList.add('playing');
-  currentPlayer.play().catch(e => console.log('Play error:', e));
+  currentPlayer.play();
 
   songElement.classList.add('selected-song');
-  currentPlayer.addEventListener('ended', playNextSong, { once: true });
+  currentPlayer.addEventListener('ended', playNextSong);
 }
 
 function playNextSong() {
@@ -330,21 +330,13 @@ function playNextSong() {
     currentSongIndex = 0;
   }
 
-  const nextSongElement = songs[currentSongIndex];
-  const nextSong = nextSongElement.querySelector('audio');
+  const nextSong = songs[currentSongIndex].querySelector('audio');
   if (nextSong) {
-    playSong(nextSong.id, nextSongElement.querySelector('.song-title'));
+    playSong(nextSong.id, songs[currentSongIndex].querySelector('.song-title'));
   }
 }
-
-// Try to keep playing in background (mobile)
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden && currentPlayer) {
-    // Try to keep playing (might need user interaction first)
-    currentPlayer.play().catch(e => console.log('Background play error:', e));
-  }
-});
 </script>
+
 
 
 
