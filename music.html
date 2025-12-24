@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Music Collection</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mynerve&display=swap">
+  
+<style>
+  * {
+    font-family: 'Mynerve', cursive;
+  }
+  
+ body {
+  text-align: center;
+  background-image: url('https://giffiles.alphacoders.com/101/10178.gif');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+  top: 20px;
+  width: 200px;
+}
+
+.select-selected {
+  background-color: rgba(145, 17, 87, 0.7);
+  color: #fff;
+  padding: 0px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+  text-align: center;
+  position: relative;
+  padding-right: 40px;
+  padding-left: 10px;
+  line-height: 40px;
+  left: 8px;
+}
+
+.select-selected::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: #fff transparent transparent transparent;
+}
+
+.select-items {
+  position: absolute;
+  top: 100%;
+  left: 18px;
+  right: 0;
+  background-color: rgba(184, 24, 112, 0.7);
+  border: none;
+  border-radius: 5px;
+  display: none;
+  z-index: 1;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.select-items div {
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  border-bottom: 1px solid #c35a9d;
+}
+
+.select-items div:hover {
+ background-color: rgba(199, 29, 123, 0.7);
+}
+
+.select-items div:last-child {
+  border-bottom: none;
+}
+
+#song-list {
+  position: absolute;
+  top: 50px;
+  left: 50.5%;
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 2px;
+  width: fit-content;
+  white-space: nowrap;
+  padding-bottom: 0; /* or try padding: 10px 10px 0 10px; */
+}
+
+#song-list.show-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.selected-song {
+  color:hotpink;
+}
+
+
+
+#song-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  
+}
+
+  audio {
+  display: none;
+  position: fixed;
+  bottom: -73vh; /* increased from 20px */
+  left: 50%;
+  transform: translateX(-50%);
+}
+  
+  audio.playing {
+  display: block !important;
+  
+}
+
+   @media only screen and (max-width: 375px) {
+     body {
+    background-image: var(--bg-image);
+    background-size: cover;
+  }
+   
+
+      #song-list {
+  position: absolute;
+  top: 50px;
+  left: 52.2% !important;
+  
+}
+
+       audio {
+  display: none;
+  position: fixed;
+  bottom: -56vh; /* increased from 20px */
+  left: 55%;
+  transform: translateX(-50%);
+}
+
+
+#song-list li[data-category="SweetNotes"] audio.playing {
+  display: block !important;
+  position: fixed !important;
+  bottom: -80vh !important;
+  left: 68% !important; /* changed from 55% to 50% */
+  transform: translateX(-50%) !important;
+}
+
+
+}
+    
+    @media only screen and (min-width: 376px) and (max-width: 768px) {
+      body {
+        background-image: url('https://i.pinimg.com/originals/fd/0a/44/fd0a44be763c9a28cadaf2013340e6b8.gif');
+        background-size: cover;
+      }
+
+      .select-selected {
+        left: 2px !important;
+      }
+
+      
+       audio {
+  display: none;
+  position: fixed;
+  bottom: -65vh; /* increased from 20px */
+  left: 50% !important;
+  transform: translateX(-50%);
+}
+
+
+ .select-items {
+  left: 5px !important;
+  
+}
+
+
+#song-list li[data-category="SweetNotes"] audio.playing {
+  display: block !important;
+  position: fixed !important;
+  bottom: -80vh !important;
+  left: 50% !important; 
+  transform: translateX(-50%) !important;
+}
+
+
+    }
+
+     
+
+  </style>
+</head>
+<body>
+  
+<a href="music.html" style="position: absolute; top: 1px; right: 1px;">
+  <img src="https://png.pngtree.com/png-clipart/20230609/ourmid/pngtree-icon-of-two-rotating-arrows-symbol-update-refresh-3d-renders-png-image_7123575.png" alt="Refresh" style="width: 40px; height: auto; cursor: pointer;">
+</a>
+
+<a href="index.html" style="position: absolute; top: 1px; left: 1px;">
+  <img src="https://static.vecteezy.com/system/resources/thumbnails/062/791/908/small/romantic-exquisite-house-shaped-character-with-a-square-chimney-clean-lines-minimal-design-with-scalable-design-fine-detail-png.png" alt="Back" style="width: 60px; height: auto; cursor: pointer;">
+</a>
+
+<div class="custom-select">
+  <div class="select-selected">I Love You bb</div>
+  <div class="select-items">
+    <div data-value="love-songs">Sleep Songzzz</div>
+    <div data-value="SweetNotes">SweetNotes</div>
+  </div>
+</div>
+
+<ul id="song-list">
+  <!-- Love Songs -->
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player1', this)">How deep is your love</span>
+    <audio id="player1" controls>
+      <source src="music/how deep.weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player2', this)">Dont Know What to Say</span>
+    <audio id="player2" controls>
+      <source src="music/dont know what to say.weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player3', this); setTimeout(() => { document.getElementById('player3').currentTime += 4.5; }, 100)">In My Dreams</span>
+    <audio id="player3" controls>
+      <source src="music/in my dreams.weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player4', this); setTimeout(() => { document.getElementById('player4').currentTime += 1; }, 100)">Yesterday once more</span>
+    <audio id="player4" controls>
+      <source src="music/yesterday.weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player5', this); setTimeout(() => { document.getElementById('player5').currentTime += 1; }, 100)">aubrey</span>
+    <audio id="player5" controls>
+      <source src="music/aubrey.weba" type="audio/webm">
+    </audio>
+  </li>
+  <!-- Rock Songs -->
+  <li data-category="SweetNotes" style="display: none;">
+    <span class="song-title" onclick="playSong('player6', this); setTimeout(() => { document.getElementById('player6').currentTime += 1; }, 100)">puro access denied ang download <br> basin later on pwede na</span>
+    <audio id="player6" controls>
+      <source src="" type="audio/webm">
+    </audio>
+  </li>
+</ul>
+  
+</body>
+  <script>
+let currentPlayer = null;
+let currentSongIndex = 0;
+let songs = [];
+let audioContext;
+let sound;
+
+document.querySelector('.select-selected').addEventListener('click', () => {
+  document.querySelector('.select-items').style.display = 'block';
+});
+
+document.addEventListener('click', (e) => {
+  if (!document.querySelector('.select-items').contains(e.target) && e.target !== document.querySelector('.select-selected')) {
+    document.querySelector('.select-items').style.display = 'none';
+  }
+});
+
+document.querySelectorAll('.select-items div').forEach((item) => {
+  item.addEventListener('click', () => {
+    document.querySelector('.select-selected').innerText = item.innerText;
+    filterSongs(item.dataset.value);
+    document.querySelector('.select-items').style.display = 'none';
+  });
+});
+
+function filterSongs(category) {
+  const songList = document.getElementById('song-list');
+  const songElements = songList.getElementsByTagName('li');
+  songs = [];
+
+  if (currentPlayer) {
+    currentPlayer.pause();
+    currentPlayer.currentTime = 0;
+    currentPlayer.style.display = 'none';
+    document.querySelector('.selected-song').classList.remove('selected-song');
+  }
+
+  for (let i = 0; i < songElements.length; i++) {
+    const song = songElements[i];
+    if (category === song.dataset.category) {
+      song.style.display = 'block';
+      songList.classList.add('show-bg');
+      songs.push(song);
+    } else {
+      song.style.display = 'none';
+    }
+  }
+
+  if (category === '') {
+    songList.classList.remove('showList-bg');
+  }
+
+  currentSongIndex = 0;
+
+  // Add event listener here
+  if (songs.length > 0 && currentPlayer) {
+    currentPlayer.addEventListener('ended', playNextSong);
+  }
+}
+
+function playSong(playerId, songElement) {
+  if (sound) {
+    sound.pause(); // Pause the current sound
+    sound = null;
+  }
+  if (currentPlayer) {
+    currentPlayer.pause();
+    currentPlayer.currentTime = 0;
+    currentPlayer.classList.remove('playing');
+    const previouslySelected = document.querySelector('.selected-song');
+    if (previouslySelected) {
+      previouslySelected.classList.remove('selected-song');
+    }
+    currentPlayer.removeEventListener('ended', playNextSong); // Remove old listener
+  }
+  currentPlayer = document.getElementById(playerId);
+  currentPlayer.classList.add('playing');
+  currentPlayer.play().catch(error => console.log('Playback error:', error));
+  songElement.classList.add('selected-song');
+  currentPlayer.onended = playNextSong; // Add new listener
+
+  // Request media session
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: songElement.textContent,
+      artist: 'Your Artist',
+      album: 'Your Album',
+    });
+    navigator.mediaSession.playbackState = 'playing';
+  }
+}
+
+//PLAY NEXT SONG
+function playNextSong() {
+  setTimeout(() => {
+    currentPlayer.classList.remove('playing');
+    document.querySelector('.selected-song').classList.remove('selected-song');
+    currentSongIndex++;
+
+    if (currentSongIndex >= songs.length) {
+      currentSongIndex = 0;
+    }
+
+    const nextSong = songs[currentSongIndex].querySelector('audio');
+    if (nextSong) {
+      playSong(nextSong.id, songs[currentSongIndex].querySelector('.song-title'));
+    }
+  }, 100); 
+}
+
+//SWAP BACKGROUND IMAGES
+const bgImages = [
+  'https://giffiles.alphacoders.com/136/13663.gif',
+  'https://i.pinimg.com/originals/5d/1c/a5/5d1ca57c605fdae93d9896719112e572.gif',
+  'https://i.pinimg.com/originals/57/a4/c9/57a4c91e391b664e7658f4e48f69c452.gif',
+];
+const sounds = [
+  new Audio('sounds/waterfalls.mp4'),
+  new Audio('sounds/new-sound.mp3'),
+  new Audio('sounds/waterflow.weba'),
+];
+sounds.forEach(sound => sound.loop = true);
+
+const randomIndex = Math.floor(Math.random() * bgImages.length);
+const randomImage = bgImages[randomIndex];
+document.documentElement.style.setProperty('--bg-image', `url(${randomImage})`);
+
+sounds[randomIndex].play().catch(error => console.log('Sound playback error:', error));
+sound = sounds[randomIndex];
+
+// Request audio focus
+if (typeof AudioContext !== 'undefined') {
+  audioContext = new AudioContext();
+} else if (typeof webkitAudioContext !== 'undefined') {
+  audioContext = new webkitAudioContext();
+}
+
+// Register service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(registration => {
+      console.log('Service worker registered');
+    })
+    .catch(error => {
+      console.log('Service worker registration failed:', error);
+    });
+}
+</script>
+
+
+
+</html>
