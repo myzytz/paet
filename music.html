@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Music Collection</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mynerve&display=swap">
+  
+<style>
+  * {
+    font-family: 'Mynerve', cursive;
+  }
+  
+ body {
+  text-align: center;
+  background-image: url('https://giffiles.alphacoders.com/101/10178.gif');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+  top: 20px;
+  width: 200px;
+}
+
+.select-selected {
+  background-color: rgba(145, 17, 87, 0.7);
+  color: #fff;
+  padding: 0px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+  text-align: center;
+  position: relative;
+  padding-right: 40px;
+  padding-left: 10px;
+  line-height: 40px;
+  left: 8px;
+}
+
+.select-selected::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: #fff transparent transparent transparent;
+}
+
+.select-items {
+  position: absolute;
+  top: 100%;
+  left: 18px;
+  right: 0;
+  background-color: rgba(184, 24, 112, 0.7);
+  border: none;
+  border-radius: 5px;
+  display: none;
+  z-index: 1;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.select-items div {
+  padding: 10px;
+  cursor: pointer;
+  color: #fff;
+  border-bottom: 1px solid #c35a9d;
+}
+
+.select-items div:hover {
+ background-color: rgba(199, 29, 123, 0.7);
+}
+
+.select-items div:last-child {
+  border-bottom: none;
+}
+
+#song-list {
+  position: absolute;
+  top: 50px;
+  left: 50.5%;
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 2px;
+  width: fit-content;
+  white-space: nowrap;
+  padding-bottom: 0; /* or try padding: 10px 10px 0 10px; */
+}
+
+#song-list.show-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.selected-song {
+  color:hotpink;
+}
+
+
+
+#song-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  
+}
+
+
+/* AUDIO BAR SECTION */
+ #custom-audio-bar {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#play-pause-btn {
+  width: 50px;
+  height: 30px;
+  background-color: #aca3a9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#progress-bar {
+  width: 200px;
+  height: 10px;
+  margin: 0 10px;
+}
+
+#current-time, #total-time {
+  font-size: 14px;
+  color: #fff;
+}
+
+
+#progress-bar {
+  accent-color: green;
+}
+
+
+audio {
+  display: none;
+}
+
+   @media only screen and (max-width: 375px) {
+     body {
+    background-image: var(--bg-image);
+    background-size: cover;
+  }
+   
+
+      #song-list {
+  position: absolute;
+  top: 50px;
+  left: 52.2% !important;
+  
+}
+
+       
+
+
+}
+    
+    @media only screen and (min-width: 376px) and (max-width: 768px) {
+      body {
+        background-image: url('https://i.pinimg.com/originals/fd/0a/44/fd0a44be763c9a28cadaf2013340e6b8.gif');
+        background-size: cover;
+      }
+
+      .select-selected {
+        left: 2px !important;
+      }
+
+ .select-items {
+  left: 5px !important;
+  
+}
+
+
+    }
+
+     
+
+  </style>
+</head>
+<body>
+  
+<a href="music.html" style="display: none; position: absolute; top: 1px; right: 1px;">
+  <img src="https://png.pngtree.com/png-clipart/20230609/ourmid/pngtree-icon-of-two-rotating-arrows-symbol-update-refresh-3d-renders-png-image_7123575.png" alt="Refresh" style="width: 40px; height: auto; cursor: pointer;">
+</a>
+
+<a href="index.html" style="display: none; position: absolute; top: 1px; left: 1px;">
+  <img src="https://static.vecteezy.com/system/resources/thumbnails/062/791/908/small/romantic-exquisite-house-shaped-character-with-a-square-chimney-clean-lines-minimal-design-with-scalable-design-fine-detail-png.png" alt="Back" style="width: 60px; height: auto; cursor: pointer;">
+</a>
+
+
+<!-- I love You bb section -->
+<div class="custom-select" style="display: none; z-index: 1; ">
+  <div class="select-selected">I Love You bb</div>
+  <div class="select-items">
+    <div data-value="love-songs">Sleep Songzzz</div>
+    <div data-value="SweetNotes">SweetNotes</div>
+  </div>
+</div>
+
+<div id="custom-audio-bar" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);">
+  <button id="play-pause-btn">Play</button>
+  <input type="range" id="progress-bar" value="0" max="100">
+  <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+</div>
+
+
+<ul id="song-list">
+  <!-- Love Songs -->
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player1', this)">How deep is your love</span>
+    <audio id="player1" controls>
+      <source src="music/how deep.weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player2', this)">Dont Know What to Say</span>
+    <audio id="player2" controls>
+      <source src="music/dont know what to say.weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player3', this); setTimeout(() => { document.getElementById('player3').currentTime += 4.5; }, 100)">In My Dreams</span>
+    <audio id="player3" controls>
+      <source src="music/in my dreams.weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player4', this); setTimeout(() => { document.getElementById('player4').currentTime += 1; }, 100)">Yesterday once more</span>
+    <audio id="player4" controls>
+      <source src="music/yesterday.weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="love-songs" style="display: none;">
+    <span class="song-title" onclick="playSong('player5', this); setTimeout(() => { document.getElementById('player5').currentTime += 1; }, 100)">aubrey</span>
+    <audio id="player5" controls>
+      <source src="music/aubrey.weba" type="audio/webm">
+    </audio>
+  </li>
+  <!-- Rock Songs -->
+  <li data-category="SweetNotes" style="display: none;">
+    <span class="song-title" onclick="playSong('player6', this); setTimeout(() => { document.getElementById('player6').currentTime += 1; }, 100)">OPM Hits Non Stop </span>
+    <audio id="player6" controls>
+      <source src="music/OPM Hits Non Stop .weba" type="audio/webm">
+    </audio>
+  </li>
+  <li data-category="SweetNotes" style="display: none;">
+    <span class="song-title" onclick="playSong('player7', this); setTimeout(() => { document.getElementById('player6').currentTime += 1; }, 100)">OPM Sweetnotes </span>
+    <audio id="player7" controls>
+      <source src="music/OPM Sweetnotes.weba" type="audio/webm">
+    </audio>
+  </li>  
+</ul>
+  
+</body>
+  <script>
+let currentPlayer = null;
+let currentSongIndex = 0;
+let songs = [];
+let audioContext;
+let sound;
+let currentSound;
+let randomIndex;
+
+var countdownInterval;
+var countdownValue = 1;
+var isCountdownRunning = false;
+var isCountdownFinished = false;
+
+const bgImages = [
+  'https://giffiles.alphacoders.com/136/13663.gif',
+  'https://i.pinimg.com/originals/5d/1c/a5/5d1ca57c605fdae93d9896719112e572.gif',
+  'https://i.pinimg.com/originals/57/a4/c9/57a4c91e391b664e7658f4e48f69c452.gif',
+];
+
+function handleClick() {
+  if (!isCountdownRunning) {
+    startCountdown();
+  } else if (isCountdownFinished) {
+    openCurtain();
+  }
+}
+
+function startCountdown() {
+  let storedIndex = localStorage.getItem('bgImageIndex');
+  let newIndex;
+
+  if (storedIndex === null) {
+    newIndex = Math.floor(Math.random() * bgImages.length);
+  } else {
+    newIndex = Math.floor(Math.random() * (bgImages.length - 1));
+    if (newIndex >= storedIndex) {
+      newIndex++;
+    }
+  }
+
+  localStorage.setItem('bgImageIndex', newIndex);
+  randomIndex = newIndex;
+  document.body.style.backgroundImage = `url(${bgImages[randomIndex]})`;
+  isCountdownRunning = true;
+  document.getElementById('countdown').style.display = 'block';
+  document.getElementById('countdown').innerHTML = "bbQ!";
+  countdownValue = 1;
+  countdownInterval = setInterval(function() {
+    countdownValue--;
+    if (countdownValue === 0) {
+      clearInterval(countdownInterval);
+      isCountdownFinished = true;
+      document.getElementById('countdown').style.display = 'none';
+    }
+  }, 1000);
+}
+
+function openCurtain() {
+  if (typeof backgroundSound !== 'undefined' && backgroundSound) {
+    backgroundSound.pause();
+    backgroundSound.currentTime = 0;
+  }
+  
+  document.getElementById('overlay-left').style.transform = 'translateX(-100%)';
+  document.getElementById('overlay-right').style.transform = 'translateX(100%)';
+  
+  if (window.innerWidth <= 768) {
+    const sounds = [
+      new Audio('sounds/waterfalls.mp4'),
+      new Audio('sounds/forest.weba'),
+      new Audio('sounds/waterflow.weba'),
+    ];
+    sounds.forEach(sound => sound.loop = true);
+    backgroundSound = sounds[randomIndex];
+    backgroundSound.play();
+  }
+  
+  setTimeout(function() {
+    document.getElementById('overlay').style.display = 'none';
+  }, 2700); 
+}
+
+document.querySelector('.select-selected').addEventListener('click', () => {
+  document.querySelector('.select-items').style.display = 'block';
+});
+
+document.addEventListener('click', (e) => {
+  if (!document.querySelector('.select-items').contains(e.target) && e.target !== document.querySelector('.select-selected')) {
+    document.querySelector('.select-items').style.display = 'none';
+  }
+});
+
+document.querySelectorAll('.select-items div').forEach((item) => {
+  item.addEventListener('click', () => {
+    document.querySelector('.select-selected').innerText = item.innerText;
+    filterSongs(item.dataset.value);
+    document.querySelector('.select-items').style.display = 'none';
+  });
+});
+
+function filterSongs(category) {
+  const songList = document.getElementById('song-list');
+  const allSongs = songList.querySelectorAll('li');
+  songs = [];
+  const songElements = songList.querySelectorAll('li[data-category="' + category + '"]');
+
+  if (currentPlayer) {
+    currentPlayer.pause();
+    currentPlayer.currentTime = 0;
+    currentPlayer.style.display = 'none';
+    document.querySelector('.selected-song').classList.remove('selected-song');
+  }
+
+  allSongs.forEach(song => {
+    song.style.display = 'none';
+  });
+
+  songElements.forEach(song => {
+    song.style.display = 'block';
+    songList.classList.add('show-bg');
+    songs.push(song);
+  });
+
+  if (category === '') {
+    songList.classList.remove('showList-bg');
+  }
+
+  currentSongIndex = 0;
+}
+
+
+function playSong(playerId, songElement) {
+  if (currentPlayer) {
+    currentPlayer.pause();
+    currentPlayer.currentTime = 0;
+    currentPlayer.classList.remove('playing');
+    const previouslySelected = document.querySelector('.selected-song');
+    if (previouslySelected) {
+      previouslySelected.classList.remove('selected-song');
+    }
+  }
+  currentPlayer = document.getElementById(playerId);
+  currentPlayer.classList.add('playing');
+
+  if (typeof backgroundSound !== 'undefined' && backgroundSound) {
+    backgroundSound.pause();
+    backgroundSound.currentTime = 0;
+  }
+
+  currentPlayer.play().catch(error => console.log('Playback error:', error));
+  songElement.classList.add('selected-song');
+
+  const songIndex = songs.findIndex(song => song.querySelector('audio').id === playerId);
+  currentSongIndex = songIndex;
+
+  currentPlayer.addEventListener('ended', playNextSong);
+
+  document.getElementById('custom-audio-bar').style.display = 'block';
+  document.getElementById('play-pause-btn').textContent = 'Pause';
+
+  currentPlayer.addEventListener('timeupdate', () => {
+    const progress = (currentPlayer.currentTime / currentPlayer.duration) * 100;
+    document.getElementById('progress-bar').value = progress;
+    document.getElementById('current-time').textContent = formatTime(currentPlayer.currentTime);
+    document.getElementById('total-time').textContent = formatTime(currentPlayer.duration);
+  });
+
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: songElement.textContent,
+      artist: 'Your Artist',
+      album: 'Your Album',
+    });
+    navigator.mediaSession.playbackState = 'playing';
+  }
+}
+
+document.getElementById('play-pause-btn').addEventListener('click', () => {
+  if (currentPlayer.paused) {
+    currentPlayer.play();
+    document.getElementById('play-pause-btn').textContent = 'Pause';
+  } else {
+    currentPlayer.pause();
+    document.getElementById('play-pause-btn').textContent = 'Play';
+  }
+});
+
+document.getElementById('progress-bar').addEventListener('input', () => {
+  const progress = document.getElementById('progress-bar').value;
+  currentPlayer.currentTime = (progress / 100) * currentPlayer.duration;
+});
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+
+//PLAY NEXT SONG
+function playNextSong() {
+  currentPlayer.classList.remove('playing');
+  document.querySelector('.selected-song').classList.remove('selected-song');
+  
+  currentSongIndex++;
+  if (currentSongIndex >= songs.length) {
+    // Stop music here
+    currentPlayer = null;
+    document.getElementById('custom-audio-bar').style.display = 'none';
+    return;
+  }
+  
+  const nextSongElement = songs[currentSongIndex];
+  const nextSongAudio = nextSongElement.querySelector('audio');
+  const nextSongTitle = nextSongElement.querySelector('.song-title');
+  
+  if (nextSongAudio && nextSongTitle) {
+    playSong(nextSongAudio.id, nextSongTitle);
+  }
+}
+
+const bgImage = document.querySelector('body'); 
+const refreshLink = document.querySelector('a[href="music.html"]');
+const backLink = document.querySelector('a[href="index.html"]');
+const customSelect = document.querySelector('.custom-select');
+const songList = document.querySelector('#song-list');
+
+customSelect.style.position = 'absolute';
+customSelect.style.top = '3vh';
+customSelect.style.left = '50%';
+customSelect.style.transform = 'translateX(-50%)';
+
+refreshLink.style.display = 'none';
+backLink.style.display = 'none';
+customSelect.style.display = 'none';
+songList.style.display = 'none';
+
+let elementsVisible = false;
+
+bgImage.addEventListener('click', (e) => {
+  if (e.target === bgImage) {
+    elementsVisible = !elementsVisible;
+    refreshLink.style.display = elementsVisible ? 'block' : 'none';
+    backLink.style.display = elementsVisible ? 'block' : 'none';
+    customSelect.style.display = elementsVisible ? 'block' : 'none';
+    songList.style.display = elementsVisible ? 'block' : 'none';
+    if (elementsVisible && currentPlayer && !currentPlayer.paused) {
+      document.getElementById('custom-audio-bar').style.display = 'block';
+    } else {
+      document.getElementById('custom-audio-bar').style.display = 'none';
+    }
+  }
+});
+
+customSelect.addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+document.querySelector('.select-items').addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+document.querySelectorAll('.select-items div').forEach((item) => {
+  item.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+});
+
+window.addEventListener('load', function() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(registration => {
+        console.log('Service Worker registered!');
+      })
+      .catch(error => {
+        console.log('Service Worker registration failed:', error);
+      });
+  }
+
+  if (typeof backgroundSound !== 'undefined' && backgroundSound) {
+    backgroundSound.pause();
+    backgroundSound.currentTime = 0;
+  }
+});
+</script>
+
+ <!-- CURTAIN -->
+  <div id="overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;" onclick="handleClick()">
+  <div id="overlay-left" style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; background-image: url('images/curtain.jpg'); background-size: 200% 100%; background-position: left; transition: transform 3s;"></div>
+  <div id="overlay-right" style="position: absolute; top: 0; right: 0; width: 50%; height: 100%; background-image: url('images/curtain.jpg'); background-size: 200% 100%; background-position: right; transition: transform 3s;"></div>
+  <div id="countdown" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; color: white; display: none;"></div>
+</div>
+
+<style>
+
+#overlay-left {
+    background-image: url('https://wallpapers.com/images/hd/curtain-background-1920-x-1080-sxxu7m9rxyjsimry.jpg') !important;
+  }
+  #overlay-right {
+    background-image: url('https://wallpapers.com/images/hd/curtain-background-1920-x-1080-sxxu7m9rxyjsimry.jpg') !important;
+  }
+
+
+  @media only screen and (min-width: 769px) {
+  body {
+    background-image: url('https://giffiles.alphacoders.com/101/10178.gif') !important;
+    background-size: 100% 100% !important;
+  }
+}
+
+  @media only screen and (max-width: 768px) and (orientation: portrait) {
+  #overlay-left {
+    background-image: url('https://w0.peakpx.com/wallpaper/506/797/HD-wallpaper-curtains-folds-wavy-gray.jpg') !important;
+  }
+  #overlay-right {
+    background-image: url('https://w0.peakpx.com/wallpaper/506/797/HD-wallpaper-curtains-folds-wavy-gray.jpg') !important;
+  }
+  #countdown {
+    font-size: 19px !important;
+    color: peachpuff !important;
+    position: absolute;
+    top: 50%;
+    left: 53% !important;
+    transform: translate(-50%, -50%);
+  }
+}
+#overlay {
+  -webkit-tap-highlight-color: transparent;
+}
+</style>
+
+
+</html>
