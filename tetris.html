@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Tetris</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+* {
+  font-family: 'Montserrat', sans-serif !important; 
+}
+
+body {
+  margin: 0;
+  background-image: url('img/bgtet.jfif');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif !important; 
+}
+
+.game-container {
+  position: relative;
+  width: 100%;
+  max-width: 20.2vw;
+  aspect-ratio: 3/5;
+  max-height: 55.6vh;
+}
+
+.score {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  font-size: 24px;
+  color:whitesmoke;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.controls button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 5px;
+  touch-action: manipulation;
+  width: 5vw;
+  height: 5vh;
+}
+
+.controls button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.arrow-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1vw;
+  justify-items: center;
+  align-items: center;
+}
+
+#left-btn {
+  grid-column: 1;
+  grid-row: 2;
+  transform: scaleX(-1);
+  margin-right: 1vw;
+}
+
+#down-btn {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+#right-btn {
+  grid-column: 3;
+  grid-row: 2;
+  margin-left: 1vw;
+}
+
+#rotate-btn {
+  grid-column: 2;
+  grid-row: 1;
+  margin-bottom: 20px;
+}
+
+#play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  font-size: 24px;
+  z-index: 1;
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.score-hidden, .controls-hidden {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .controls {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  
+  body {
+    margin: 0;
+    background-image: url('img/bgtet.jfif') ;
+    background-size: cover;
+    background-position: 37% center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif !important; 
+  }
+
+  .game-container {
+    max-width: 99vw !important;
+    max-height: 77vh !important;
+    margin-top: -22.5vh !important;
+  }
+  .score {
+    top: -20px;
+    left: 3px !important;
+    font-size: 18px;
+    margin-top: 20px !important;
+  }
+
+  .controls-left {
+    left: 42vw;
+    transform: translateX(-100%);
+  }
+
+  .controls {
+    position: absolute !important;
+    top: 74vh !important; 
+    margin-right:-55vw !important ;
+  }
+  .controls button {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 2px !important;
+  }
+  .arrow-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    justify-items: center;
+    align-items: center;
+  }
+  .left-btn {
+    grid-column: 1;
+    grid-row: 2;
+    transform: scaleX(-1);
+  }
+  .down-btn {
+    grid-column: 2;
+    grid-row: 3;
+  }
+  .right-btn {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  .rotate-btn {
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 5px;
+  }
+  #replay-btn{
+    z-index: 1 !important;
+  }
+}
+</style>
+</head>
+<body>
+
+  <button id="replay-btn" style="position: absolute; top: 10px; right: 10px; display: none; color:darkslateblue; " onclick="location.href='tetris.html'">nya? <br>usob paka?</button>
+<script>
+  function showReplayButton() {
+    document.getElementById('replay-btn').style.display = 'block';
+  }
+
+  
+
+</script>
+
+ <div class="background"></div>
+
+<div class="lightbox">
+  <button id ="play-btn" style="color: hotpink !important;">Play</button>
+</div>
+
+<div class="game-container">
+  <div class="score">Score: <span id="score">0</span></div>
+  <canvas id="canvas"></canvas>
+</div>
+
+<div class="controls controls-left controls-hidden">
+  <button class="rotate-btn"><img src="https://www.freeiconspng.com/thumbs/arrow-down-icon-png/arrow-down-icon-png-3.png" alt="Rotate" style="transform: scaleY(-1);"></button>
+  <div class="arrow-btns">
+    <button class="left-btn" style="transform: scaleX(-1);" ><img src="https://www.freeiconspng.com/thumbs/arrow-icon/right-arrow-icon-27.png" alt="Left"></button>
+    <button class="down-btn"><img src="https://www.freeiconspng.com/thumbs/arrow-down-icon-png/arrow-down-icon-png-3.png" alt="Down"></button>
+    <button class="right-btn"><img src="https://www.freeiconspng.com/thumbs/arrow-icon/right-arrow-icon-27.png" alt="Right"></button>
+  </div>
+</div>
+
+<div class="controls controls-hidden">
+  <button class="rotate-btn"><img src="https://www.freeiconspng.com/thumbs/arrow-down-icon-png/arrow-down-icon-png-3.png" alt="Rotate" style="transform: scaleY(-1);"></button>
+  <div class="arrow-btns">
+    <button class="left-btn" style="transform: scaleX(-1);" ><img src="https://www.freeiconspng.com/thumbs/arrow-icon/right-arrow-icon-27.png" alt="Left"></button>
+    <button class="down-btn"><img src="https://www.freeiconspng.com/thumbs/arrow-down-icon-png/arrow-down-icon-png-3.png" alt="Down"></button>
+    <button class="right-btn"><img src="https://www.freeiconspng.com/thumbs/arrow-icon/right-arrow-icon-27.png" alt="Right"></button>
+  </div>
+</div>
+
+
+
+<script>
+// GET REFERENCES TO THE CANVAS AND SCORE ELEMENT
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const container = document.querySelector('.game-container');
+const scoreElement = document.getElementById('score');
+const playBtn = document.getElementById('play-btn');
+
+document.querySelector('.score').classList.add('score-hidden');
+document.querySelector('.controls').classList.add('controls-hidden');
+
+canvas.width = container.clientWidth;
+canvas.height = container.clientHeight;
+
+// Load the background image
+let backgroundImage = new Image();
+backgroundImage.src = 'img/1.jpg';
+
+// Load the fire texture
+let fireTexture = new Image();
+fireTexture.src = 'https://thumbs.dreamstime.com/b/colored-concrete-texture-3146261.jpg';
+
+
+// DEFINE GAME CONSTANTS AND VARIABLES
+const gridWidth = 13;
+const gridSize = Math.floor((canvas.width - 2) / gridWidth);
+const gridHeight = Math.floor((canvas.height - 2) / gridSize);
+let score = 0;
+let gameOver = false;
+let gameOverSoundPlayed = false;
+let paddingX, paddingY;
+let particles = [];
+let gameStarted = false;
+
+// TETRIS SHAPES
+let pieces = [
+  [[1, 1], [1, 1]], // O
+  [[1, 0, 0], [1, 1, 1]], // T
+  [[0, 0, 1], [1, 1, 1]], // L
+  [[1, 1, 1], [0, 0, 1]], // J
+  [[1, 1, 0], [0, 1, 1]], // S
+  [[0, 1, 1], [1, 1, 0]], // Z
+  [[1], [1], [1], [1]] // I
+];
+let currentPiece = getRandomPiece();
+let grid = Array(gridHeight).fill(0).map(() => Array(gridWidth).fill(0));
+
+const gridCanvas = document.createElement('canvas');
+const gridCtx = gridCanvas.getContext('2d');
+gridCtx.imageSmoothingEnabled = false;
+gridCanvas.width = gridWidth * gridSize;
+gridCanvas.height = gridHeight * gridSize;
+
+const textureImage = document.createElement('canvas');
+textureImage.width = 1;
+textureImage.height = 1;
+const texCtx = textureImage.getContext('2d');
+texCtx.fillStyle = '#FF69B4'; // pink color
+texCtx.fillRect(0, 0, 1, 1);
+
+const pileImage = document.createElement('canvas');
+pileImage.width = 1;
+pileImage.height = 1;
+const pileCtx = pileImage.getContext('2d');
+pileCtx.fillStyle = '#FF69B4'; // white color
+pileCtx.fillRect(0, 0, 1, 1);
+let pileLoaded = false;
+
+pileImage.onload = function() {
+  pileLoaded = true;
+  drawGrid();
+};
+
+// GET RANDOM PIECE FUNCTION
+function getRandomPiece() {
+  let piece = pieces[Math.floor(Math.random() * pieces.length)];
+  return {
+    x: Math.floor(gridWidth / 2) - Math.floor(piece[0].length / 2),
+    y: 0,
+    lastY: 0,
+    shape: piece
+  };
+}
+
+// PLAY BUTTON EVENT LISTENER
+playBtn.addEventListener('click', () => {
+  playBtn.parentElement.style.display = 'none';
+  gameStarted = true;
+  document.querySelector('.score').classList.remove('score-hidden');
+  document.querySelectorAll('.controls').forEach(control => {
+    control.classList.remove('controls-hidden');
+  });
+  requestAnimationFrame(update);
+});
+
+// DRAW FUNCTION
+ctx.imageSmoothingEnabled = false;
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+  let padding = Math.min((canvas.width - gridWidth * gridSize) / 2, (canvas.height - gridHeight * gridSize) / 1);
+  paddingX = padding;
+  paddingY = padding;
+  ctx.drawImage(gridCanvas, paddingX, paddingY);
+ for (let particle of particles) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(particle.x, particle.y, particle.radius, 0, 2 * Math.PI);
+  ctx.fillStyle = particle.color;
+  ctx.fill();
+  ctx.restore();
+  particle.x += particle.vx;
+  particle.y += particle.vy;
+  particle.life--;
+  if (particle.life <= 0) {
+    particles.splice(particles.indexOf(particle), 1);
+  }
+}
+  {
+    let pieceWidth = currentPiece.shape[0].length * gridSize;
+    let pieceHeight = currentPiece.shape.length * gridSize;
+    let pieceX = Math.floor(currentPiece.x * gridSize + paddingX);
+    let pieceY = Math.floor(currentPiece.y * gridSize + paddingY);
+
+    ctx.save();
+    ctx.beginPath();
+    for (let y = 0; y < currentPiece.shape.length; y++) {
+      for (let x = 0; x < currentPiece.shape[y].length; x++) {
+        if (currentPiece.shape[y][x]) {
+          ctx.rect((currentPiece.x + x) * gridSize + paddingX, (currentPiece.y + y) * gridSize + paddingY, gridSize, gridSize);
+        }
+      }
+    }
+    ctx.clip();
+    ctx.drawImage(textureImage, pieceX, pieceY, pieceWidth, pieceHeight);
+    ctx.restore();
+  } 
+  ctx.restore();
+  if (gameOver) {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.font = `${gridSize * 2}px 'Montserrat', sans-serif`;
+  ctx.fillStyle = 'white';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Game Over!', canvas.width / 2, canvas.height / 2 - gridSize);
+  ctx.font = `${gridSize}px 'Montserrat', sans-serif`;
+  ctx.fillText('Aray Kooh!', canvas.width / 2, canvas.height / 2 + gridSize);
+  ctx.fillText('Score: ' + score, canvas.width / 2, canvas.height / 2 + gridSize * 2);
+}
+}
+
+// GAME UPDATE FUNCTION
+let lastTime = 0;
+let dropInterval = 500;
+let dropFast = false;
+
+function update(time) {
+  if (!gameStarted) return;
+  let deltaTime = time - lastTime;
+  lastTime = time;
+  let dropIntervalTemp = dropFast ? 15 : dropInterval;
+  if (canMove(0, 1)) {
+    currentPiece.y += deltaTime / dropIntervalTemp;
+  } else {
+    placePiece();
+    clearLines();
+    currentPiece = getRandomPiece();
+    if (checkGameOver()) {
+      if (!gameOverSoundPlayed) {
+        playGameOverSound();
+        gameOverSoundPlayed = true;
+      }
+      gameOver = true;
+      showReplayButton();
+    }
+    dropFast = false;
+  }
+  draw();
+  scoreElement.textContent = score;
+  requestAnimationFrame(update);
+}
+
+// PLACE PIECE FUNCTION
+function placePiece() {
+  for (let y = 0; y < currentPiece.shape.length; y++) {
+    for (let x = 0; x < currentPiece.shape[y].length; x++) {
+      if (currentPiece.shape[y][x]) {
+        let nx = currentPiece.x + x;
+        let ny = Math.floor(currentPiece.y) + y;
+        if (ny >= 0 && ny < gridHeight && nx >= 0 && nx < gridWidth) {
+          grid[ny][nx] = 1;
+        }
+      }
+    }
+  }
+  drawGrid();
+}
+
+// CHECK IF PIECE CAN MOVE FUNCTION
+function canMove(dx, dy) {
+  for (let y = 0; y < currentPiece.shape.length; y++) {
+    for (let x = 0; x < currentPiece.shape[y].length; x++) {
+      if (currentPiece.shape[y][x]) {
+        let nx = currentPiece.x + x + dx;
+        let ny = Math.floor(currentPiece.y) + y + dy;
+        if (nx < 0 || nx >= gridWidth || ny >= gridHeight || (ny >= 0 && grid[ny][nx])) {
+          return false;
+        }
+        if (ny < 0) continue;
+      }
+    }
+  }
+  return true;
+}
+
+// EXPLOTION FUNCTION
+function clearLines() {
+  for (let y = 0; y < gridHeight; y++) {
+    if (grid[y].every(cell => cell === 1)) {
+      // ADD DESTROY EFFECT
+      for (let x = 0; x < gridWidth; x++) {
+        grid[y][x] = 2; // MARK CELLS FOR DESTRUCTION
+        for (let i = 0; i < 10; i++) {
+          let color;
+          switch (Math.floor(Math.random() * 4)) {
+            case 0:
+              color = '#FFFF00'; // Yellow
+              break;
+            case 1:
+              color = '#FF0000'; // Red
+              break;
+            case 2:
+              color = '#FF69B4'; // Pink
+              break;
+            case 3:
+              color = '#FFFFFF'; // White
+              break;
+          }
+          particles.push({
+            x: x * gridSize + paddingX + gridSize / 2,
+            y: y * gridSize + paddingY + gridSize / 2,
+            vx: Math.random() * 4 - 2,
+            vy: Math.random() * 4 - 2,
+            radius: Math.random() * 3 + 1,
+            life: 30,
+            color: color
+          });
+        }
+      }
+      score++;
+      playExplosionSound();
+      setTimeout(() => {
+        for (let x = 0; x < gridWidth; x++) {
+          grid[y][x] = 3; // MARK CELLS FOR FINAL DESTRUCTION
+        }
+        setTimeout(() => {
+          grid.splice(y, 1);
+          grid.unshift(Array(gridWidth).fill(0));
+          drawGrid();
+        }, 100); // WAIT FOR 100MS BEFORE REMOVING THE LINE
+      }, 200); // WAIT FOR 200MS BEFORE FINAL DESTRUCTION
+    }
+  }
+}
+
+// Update the draw function to use the fire texture
+for (let particle of particles) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(particle.x, particle.y, particle.radius, 0, 2 * Math.PI);
+  ctx.fillStyle = particle.color;
+  ctx.fill();
+  ctx.restore();
+  particle.x += particle.vx;
+  particle.y += particle.vy;
+  particle.life--;
+  if (particle.life <= 0) {
+    particles.splice(particles.indexOf(particle), 1);
+  }
+}
+// CHECK GAME OVER FUNCTION
+function checkGameOver() {
+  for (let y = 0; y < currentPiece.shape.length; y++) {
+    for (let x = 0; x < currentPiece.shape[y].length; x++) {
+      if (currentPiece.shape[y][x] && (currentPiece.y + y < 0 || grid[Math.floor(currentPiece.y) + y][currentPiece.x + x])) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+// PLAY GAME OVER SOUND FUNCTION
+function playGameOverSound() {
+  const gameOverSound = new Audio('sounds/arayko.weba');
+  gameOverSound.currentTime = 1; // forward the sound by 1 second
+  gameOverSound.play();
+}
+
+// PLAY EXPLOSION SOUND FUNCTION
+function playExplosionSound() {
+  const explosionSound = new Audio('sounds/doom.weba');
+  explosionSound.play();
+}
+
+function drawGrid() {
+  gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
+  const texturePattern = gridCtx.createPattern(textureImage, 'repeat');
+  const pilePattern = gridCtx.createPattern(pileImage, 'repeat');
+  gridCtx.imageSmoothingEnabled = false;
+  for (let y = 0; y < gridHeight; y++) {
+    for (let x = 0; x < gridWidth; x++) {
+      if (grid[y][x] === 1) {
+        gridCtx.fillStyle = pilePattern;
+        gridCtx.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
+      } else if (grid[y][x] === 2) {
+        gridCtx.fillStyle = 'red';
+        gridCtx.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
+        gridCtx.fillStyle = texturePattern;
+      } else if (grid[y][x] === 3) {
+        // DO NOTHING, LET IT DISAPPEAR
+      }
+    }
+  }
+  draw(); // Call draw function after grid is updated
+}
+
+// KEY BUTTONS FUNCTIONS
+document.addEventListener('keydown', e => {
+  if (!gameStarted || gameOver) return;
+  if (e.key === 'ArrowLeft' && canMove(-1, 0)) {
+    playMoveSound();
+    currentPiece.x--;
+  }
+  if (e.key === 'ArrowRight' && canMove(1, 0)) {
+    playMoveSound();
+    currentPiece.x++;
+  }
+  if (e.key === 'ArrowDown') {
+    playDownSound();
+    dropFast = true;
+  }
+  if (e.key === 'ArrowUp') {
+    playRotateSound();
+    let rotated = currentPiece.shape[0].map((_, i) => currentPiece.shape.map(row => row[i]).reverse());
+    let oldShape = currentPiece.shape;
+    currentPiece.shape = rotated;
+    if (!canMove(0, 0)) currentPiece.shape = oldShape;
+    if (currentPiece.x + currentPiece.shape[0].length > gridWidth) {
+      currentPiece.x = gridWidth - currentPiece.shape[0].length;
+    }
+    if (currentPiece.x < 0) {
+      currentPiece.x = 0;
+    }
+  }
+});
+
+document.addEventListener('keyup', e => {
+  if (!gameStarted || gameOver) return;
+  if (e.key === 'ArrowDown') {
+    dropFast = false;
+  }
+});
+
+document.querySelectorAll('.right-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (canMove(1, 0)) {
+      playMoveSound();
+      currentPiece.x++;
+    }
+  });
+});
+
+document.querySelectorAll('.left-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (canMove(-1, 0)) {
+      playMoveSound();
+      currentPiece.x--;
+    }
+  });
+});
+
+document.querySelectorAll('.down-btn').forEach(btn => {
+  btn.addEventListener('touchstart', () => {
+    playDownSound();
+    dropFast = true;
+  });
+  btn.addEventListener('touchend', () => {
+    dropFast = false;
+  });
+});
+
+document.querySelectorAll('.rotate-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    playRotateSound();
+    let rotated = currentPiece.shape[0].map((_, i) => currentPiece.shape.map(row => row[i]).reverse());
+    let oldShape = currentPiece.shape;
+    currentPiece.shape = rotated;
+    if (!canMove(0, 0)) currentPiece.shape = oldShape;
+    if (currentPiece.x + currentPiece.shape[0].length > gridWidth) {
+      currentPiece.x = gridWidth - currentPiece.shape[0].length;
+    }
+    if (currentPiece.x < 0) {
+      currentPiece.x = 0;
+    }
+  });
+});
+
+function playRotateSound() {
+  const rotateSound = new Audio('');
+  rotateSound.currentTime = 0.2; 
+  rotateSound.play();
+  setTimeout(() => {
+    rotateSound.pause();
+    rotateSound.currentTime = 0;
+  }, 1500); // stop playing after 1.5 seconds
+}
+
+function playMoveSound() {
+  const moveSound = new Audio('');
+  moveSound.currentTime = 0; 
+  moveSound.play();
+}
+
+function playDownSound() {
+  const downSound = new Audio('');
+  downSound.currentTime = 0; 
+  downSound.play();
+  setTimeout(() => {
+    downSound.pause();
+    downSound.currentTime = 0;
+  }, 1000); // stop playing after 1 second
+}
+</script>
+</body>
+
+</html> 
+
